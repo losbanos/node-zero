@@ -1,0 +1,9 @@
+{
+  "name": "node-zero",
+  "version": "1.0.0",
+  "description": "This is Node Study Project",
+  "repository": {},
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {}
+}
