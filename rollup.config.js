@@ -1,30 +1,43 @@
 import {defineConfig} from 'rollup';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-export default [
-    {
-        input: 'src/app.js',
-        output: {
-            file: 'dist/bundle.js',
-            format: 'umd'
-        },
-    },
-    {
-        input: 'src/launchTime.js',
-        output: [
+
+export default commandLineArgs => {
+    if (commandLineArgs.configDebug) {
+        return [
             {
-                file: 'dist/bundle2.js',
-                format: 'cjs'
+                input: 'src/app.js',
+                output: {
+                    file: 'dist/bundle.js',
+                    format: 'umd'
+                },
             },
             {
-                name: 'bundle3',
-                file: 'dist/bundle3.js',
-                format: 'umd'
+                input: 'src/launchTime.js',
+                output: [
+                    {
+                        file: 'dist/bundle2.js',
+                        format: 'cjs'
+                    },
+                    {
+                        name: 'bundle3',
+                        file: 'dist/bundle3.js',
+                        format: 'umd'
+                    }
+                ],
+                plugins: [
+                    nodeResolve(),
+                    commonjs()
+                ]
             }
-        ],
-        plugins: [
-            nodeResolve(),
-            commonjs()
         ]
+    } else {
+        return {
+            input: 'src/app.js',
+            output: {
+                file: 'dist/bundle.js',
+                format: 'esm'
+            },
+        }
     }
-]
+}
