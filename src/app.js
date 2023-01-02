@@ -24,19 +24,23 @@ const server = http.createServer((req, res) => {
             const parsedBody = Buffer.concat(body).toString();
             console.log(parsedBody);
             const message = parsedBody.split('=')[1];
-            fs.writeFileSync('message.txt', message);
+            fs.writeFile('message.txt', message, err => {
+                res.statusCode = 302;
+                res.setHeader('Location', '/');
+                console.log('async end call()');
+                return res.end();
+            });
 
         })
-        res.statusCode = 302;
-        res.setHeader('Location', '/');
-        return res.end();
+    } else {
+        res.setHeader('Content-Type', 'text/html');
+        res.write('<html lang="ko">');
+        res.write('<head><title>Ted Jin 520</title></head>');
+        res.write('<body><h1>This is Node Server Page</h1></body>');
+        res.write('</html>');
+        res.end('Ted, it\'s ok');
+        console.log('res end call()');
     }
-    res.setHeader('Content-Type', 'text/html');
-    res.write('<html lang="ko">');
-    res.write('<head><title>Ted Jin 520</title></head>');
-    res.write('<body><h1>This is Node Server Page</h1></body>');
-    res.write('</html>');
-    res.end('Ted, it\'s ok');
     // process.exit();
 });
 
