@@ -6,10 +6,10 @@ const requestHandler = (req, res) => {
 
     if (url === '/') {
         res.setHeader('Content-Type', 'text/html');
-        res.write('<html lang="ko">');
+        res.write('<html lang="ko" class="on-on">');
         res.write('<head><title>Ted Jin 520 Send Message</title></head>');
-        res.write('<body><h1>Send Message</h1>');
-        res.write('<form action="/message" method="post"><input type="text" name="message" /><button type="submit">Send</button></form></body>')
+        res.write('<body><h1 class="h1-wrapper">Send Message</h1>');
+        res.write('<form class="form_wrap" action="/message" method="post"><input type="text" name="message" /><button type="submit">Send</button></form></body>');
         res.write('</html>');
         return res.end();
     }
@@ -17,16 +17,14 @@ const requestHandler = (req, res) => {
     if (url === '/message' && method === 'POST') {
         req.on('data', chunk => {
             body.push(chunk);
-            console.log('chunk = ', chunk);
         })
         req.on('end', chunk => {
             const parsedBody = Buffer.concat(body).toString();
-            console.log(parsedBody);
+            const parsedBodyO = parsedBody.split('=')[0];
             const message = parsedBody.split('=')[1];
             fs.writeFile('message.txt', message, err => {
                 res.statusCode = 302;
                 res.setHeader('Location', '/');
-                console.log('async end call()');
                 return res.end();
             });
 

@@ -5,17 +5,20 @@
   "repository": {},
   "main": "index.js",
   "license": "MIT",
-  "type": "module",
   "scripts": {
     "build": "rollup --c",
-    "dev:build": "rollup --c --configDebug"
+    "dev:build": "rollup --c --configDebug",
+    "server:start": "nodemon ./src/app.js"
   },
-  "dependencies": {},
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^10.0.1",
+    "nodemon": "^2.0.20",
     "rollup": "^3.8.1",
     "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   }
 }
