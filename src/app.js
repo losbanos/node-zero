@@ -8,7 +8,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use(routerAdmin);
+app.use('/admin', routerAdmin);
 app.use(routerShop);
 app.use(router404);
 
