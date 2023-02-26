@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const {publicDir} = require('./utils/path');
-const routerAdmin = require('./routes/admin');
+const {routerAdmin} = require('./routes/admin');
 const routerShop = require('./routes/shop');
 const router404 = require('./routes/404');
 
