@@ -1,4 +1,4 @@
-// import axios from '/node_modules/axios'
+// import axios from 'axios';
 
 class Login {
     constructor() {
@@ -12,12 +12,12 @@ class Login {
             const formUserPassword = document.querySelector('#formUserPassword');
 
             function setLoginData(cookieValues) {
-                for(const keyValue of cookieValues) {
+                for (const keyValue of cookieValues) {
                     Object.entries(keyValue).map(([key, value]) => {
                         const date = new Date();
                         date.setDate(date.getDate() + (24 * 60 * 60 * 1000));
                         document.cookie = `${key}=${value};expires=${date.toUTCString()}`;
-                        return [key,value];
+                        return [key, value];
                     });
                 }
             }
@@ -25,14 +25,26 @@ class Login {
             loginBtn.addEventListener('click', () => {
                 const userName = formUserName.value;
                 const userPassword = formUserPassword.value;
-                console.log('name = ', userName);
-                console.log('password = ', userPassword);
-                if (userName === 'tedjin' && userPassword === 'tedjinS30%^') {
-                    setLoginData([{userName: userName},{userPassword: userPassword}, {isLogined: true}]);
-                }
+
+                axios.post('gologin', {
+                    userName: userName,
+                    userPassword: userPassword
+                }, {
+                    headers: {
+                        'Content-type': 'application/json'
+                    }
+                }).then((res) => {
+                    const {value} = res.data;
+                    if (value) {
+                        location.href='/';
+                    }
+                }).catch(e => {
+
+                })
             })
         }
     }
 }
+
 
 export default new Login()

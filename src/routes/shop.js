@@ -5,22 +5,35 @@ const {products} = require('./admin');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    // console.log('from shop = ', products);
-    // res.sendFile(path.join(rootDir, 'views', 'shop.html'));
     res.render('shop');
 });
 router.get('/login', (req, res, next) => {
-    res.render('login');
+    const {isLogined} = req.cookies;
+    if (isLogined) {
+        res.status(301).cookie('isLogined', false, {maxAge: 0})
+        res.redirect(path.resolve(__dirname, '/'));
+    } else {
+        res.render('login');
+    }
+
 })
 router.post('/gologin', (req, res, next) => {
     const userName = req.body.userName;
     const userPassword = req.body.userPassword
-    if (userName === 'tedjin' && userPassword === 'tedjinS30%^') {
-        res.status(200).send({
-            message: 'Login Success'
+    const date = new Date();
+    date.setDate(date.getDate() + (24 * 60 * 60 * 1000));
+    if (userName === '1' && userPassword === '2') {
+        res.status(200).cookie('isLogined', true, {expires: date}).send({
+            message: 'Login Success',
+            value: {
+                isLogined: true
+            }
         })
+
     } else {
-        res.status(402).send({
+        res.status(401).cookie(
+            'isLogined', false
+        ).send({
             message: 'Login Fail'
         })
     }
