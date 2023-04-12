@@ -2,10 +2,12 @@ const path = require('path');
 const express = require('express');
 const {rootDir} = require('../utils/path');
 const {products} = require('./admin');
+const {setExpireTime} = require('../utils/cookieUtils');
 const router = express.Router();
 
 router.get('/', (req, res, next) => {
-    res.render('shop');
+    const visitCount = parseInt(req.cookies.views) + 1 || 1;
+    res.cookie('views', visitCount, {expires: setExpireTime(2)}).render('shop');
 });
 router.get('/login', (req, res, next) => {
     const {isLogined} = req.cookies;
@@ -21,8 +23,8 @@ router.post('/gologin', (req, res, next) => {
     const userName = req.body.userName;
     const userPassword = req.body.userPassword
     const date = new Date();
-    date.setDate(date.getDate() + (24 * 60 * 60 * 1000));
-    if (userName === '1' && userPassword === '2') {
+    date.setTime(date.getTime() + (24 * 60 * 60 * 1000));
+    if (userName === 'jin' && userPassword === 'ted') {
         res.status(200).cookie('isLogined', true, {expires: date}).send({
             message: 'Login Success',
             value: {
