@@ -2,7 +2,7 @@ html
     head
         meta(charset='utf-8')
         link(rel='stylesheet' href='/css/main.css')
-        title #{title}
+        title 샵
     body
         header.main-header
             nav.main-header__nav
@@ -11,19 +11,11 @@ html
                         a.active(href='/') Shop
                     li.main-header__item
                         a(href='/admin/add-product') Add Product
+                    li.main-header__item
+                        a(href='/login', id='login') Login
         main
-            div.grid
-                if prod.length > 0
-                    each product in prod
-                        article.card.product-item
-                            header.card__header
-                                h1.product__title #{product.title}
-                            .card__image
-                                img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6yz4Dc1wpcop-c1DC0qy5w4nf8AW904lfnCVbzPLStKMTlnJvV40fUm0wg-otR1hW2-o&usqp=CAU", alt="A Book")
-                            .card__content
-                                h2.product__price $19.99
-                                p.product__description A very interesting book about so many even more interesting things!
-                            .card__actions
-                                button.btn Add to Cart
-                else
-                    h1 등록된 상품이 없어.
+            h1 상품 목록 페이지
+            p 모든 상품 목록
+            p 상품 CSS 및 PUG 기반 페이지
+        script(type='module' src='/js/main.js')
+
