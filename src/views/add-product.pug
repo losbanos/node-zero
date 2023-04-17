@@ -1,0 +1,10 @@
+extends layouts/default-layout
+include mixins/stylelinks
+append styles
+    +stylelinks(['/css/product.css'])
+block contents
+    form.product-form(action="/admin/add-product" method="POST")
+        div.form-control
+        label(for="title") Title
+        input(type="text" name="title" id="title")
+        button(type="submit") 등록

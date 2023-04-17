@@ -1,21 +1,13 @@
-html
-    head
-        title 로그인
-        link(href='/css/main.css', rel='stylesheet')
-        link(href='/css/login.css', rel='stylesheet')
-    body.login
-        header.main-header
-            nav.main-header__nav
-                ul.main-header__item-list
-                    li.main-header__item
-                        a.active(href='/') Shop
-                    li.main-header__item
-                        a(href='/admin/add-product') Add Product
-
-        .login-form
-            h1 로그인 하세요
-                input#formUserName(type='text', placeholder='User Name', required='true', name='userName')
-                input#formUserPassword(type='password', placeholder='password', required='true' name='userPassword')
-                button#login-button(type='button') 로그인
-        script(src='https://unpkg.com/axios/dist/axios.min.js', type='text/javascript')
-        script(src='js/login.js', type='module')
+extends layouts/default-layout
+include mixins/stylelinks
+append styles
+    +stylelinks(['/css/login.css'])
+block contents
+    .login-form
+        h1 로그인 하세요
+            input#formUserName(type='text', placeholder='User Name', required='true', name='userName')
+            input#formUserPassword(type='password', placeholder='password', required='true' name='userPassword')
+            button#login-button(type='button') 로그인
+append contents
+    script(src='https://unpkg.com/axios/dist/axios.min.js', type='text/javascript')
+    script(src='js/login.js', type='module')

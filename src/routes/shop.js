@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
     const visitCount = parseInt(req.cookies.views) + 1 || 1;
-    res.cookie('views', visitCount, {expires: setExpireTime(2)}).render('shop');
+    res.cookie('views', visitCount, {expires: setExpireTime(2)}).render('shop', {docTitle: '샵'});
 });
 router.get('/login', (req, res, next) => {
     const {isLogined} = req.cookies;
@@ -15,7 +15,7 @@ router.get('/login', (req, res, next) => {
         res.status(301).cookie('isLogined', false, {maxAge: 0})
         res.redirect(path.resolve(__dirname, '/'));
     } else {
-        res.render('login');
+        res.render('login', {docTitle: '로그인'});
     }
 
 })

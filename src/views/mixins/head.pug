@@ -1,0 +1,5 @@
+mixin head(parameters)
+    meta(charset="UTF-8")
+    title=parameters.title
+    each val, index in parameters.style
+        link(rel="stylesheet" href=val)

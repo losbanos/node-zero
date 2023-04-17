@@ -3,5 +3,5 @@ const path = require('path');
 const {rootDir} = require('../utils/path');
 
 module.exports = express.Router().use((req, res, next) => {
-    res.status(404).sendFile(path.join(rootDir, 'views', '404.html'));
+    res.status(404).render('404', {docTitle: 'Not Found'});
 })

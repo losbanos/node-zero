@@ -1,0 +1,7 @@
+mixin nav
+    - var menus = [{name: 'Shop1', href:'/'}, {name: 'Add Product', href:'/admin/add-product'}, {name: 'Login', id: 'login', href:'/login'}]
+    nav.main-header__nav
+        ul.main-header__item-list
+             each val, index in menus
+                 li.main-header__item
+                    a(href=val.href id=val.id)=val.name
