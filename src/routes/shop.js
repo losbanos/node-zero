@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/', (req, res, next) => {
     const visitCount = parseInt(req.cookies.views) + 1 || 1;
-    res.cookie('views', visitCount, {expires: setExpireTime(2)}).render('shop', {docTitle: '샵', pagePath: '/'});
+    res.cookie('views', visitCount, {expires: setExpireTime(2)}).render('shop', {docTitle: '샵', pagePath: '/', products: products});
 });
 router.get('/login', (req, res, next) => {
     const {isLogined} = req.cookies;

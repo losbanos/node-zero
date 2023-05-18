@@ -8,7 +8,7 @@ const router404 = require('./routes/404');
 const path = require('path');
 
 const app = express();
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 app.set('views', path.join(rootDir, 'views'));
 
 app.use(bodyParser.urlencoded({extended: true}));

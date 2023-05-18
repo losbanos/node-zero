@@ -11,7 +11,8 @@ routerAdmin.get('/add-product', (req, res, next) => {
 
 routerAdmin.post('/add-product', (req, res, next) => {
     products.push({
-        title: req.body.title
+        title: req.body.title,
+        description: req.body.description
     });
     res.redirect(path.resolve(__dirname, '/'));
 });

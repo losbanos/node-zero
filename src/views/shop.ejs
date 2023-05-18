@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/main.css" />
+    <title><%= docTitle %></title>
+</head>
+<body>
+<header class="main-header">
+    <nav class="main-header__nav">
+        <ul class="main-header__item-list">
+            <li class="main-header__item"><a class="active" href="/">Shop</a></li>
+            <li class="main-header__item"><a href="/admin/add-product">Add Product</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <% if(products.length) {%>
+        <h1><% for (let product of products) {%></h1>
+            <p><%= product.title %></p>
+            <p><%= product.description %></p>
+        <% }%>
+    <%} else {%>
+        <h1> 등록된 상품이 없어 !!</h1>
+    <%}%>
+</main>
+</body>
+</html>
