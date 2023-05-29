@@ -6,11 +6,10 @@ class Login {
     }
 
     init() {
-        window.onload = function () {
+        document.addEventListener('DOMContentLoaded', function () {
             const loginBtn = document.querySelector('#login-button');
             const formUserName = document.querySelector('#formUserName');
             const formUserPassword = document.querySelector('#formUserPassword');
-
             loginBtn.addEventListener('click', () => {
                 const userName = formUserName.value;
                 const userPassword = formUserPassword.value;
@@ -31,9 +30,8 @@ class Login {
 
                 })
             })
-        }
+        })
     }
 }
-
 
 export default new Login()
