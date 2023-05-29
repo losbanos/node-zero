@@ -1,0 +1,8 @@
+<% var menus = [{name: 'Shop1', href:'/', id: 'shop'}, {name: 'Add Product', href:'/admin/add-product', id:'add-product'}, {name: 'Login', id: 'login', href:'/login'}]%>
+<nav class="main-header__nav">
+    <ul class="main-header__item-list">
+        <% for (let menu of menus) { %>
+        <li class="main-header__item"><a class="active" href="<%= menu.href%>"id="<%= menu.id%>"><%= menu.name %></a></li>
+        <% } %>
+    </ul>
+</nav>
