@@ -1,24 +1,12 @@
 const express = require('express');
-const path = require('path');
+const {getAddProduct, getPostProduct} = require('../controllers/products');
 const routerAdmin = express.Router();
-const {rootDir} = require('../utils/path');
-const products = [];
 
-routerAdmin.get('/add-product', (req, res, next) => {
-    // res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
-    res.render('add-product', {docTitle: '상품 등록', pagePath: '/admin/add-product', lang: req.currentLanguage});
-});
 
-routerAdmin.post('/add-product', (req, res, next) => {
-    products.push({
-        title: req.body.title,
-        description: req.body.description
-    });
-    res.redirect(path.resolve(__dirname, '/'));
-});
+routerAdmin.get('/add-product', getAddProduct);
+
+routerAdmin.post('/add-product', getPostProduct);
 
 module.exports = {
-    routerAdmin,
-    products
+    routerAdmin
 };
-

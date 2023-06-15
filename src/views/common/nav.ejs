@@ -3,7 +3,7 @@
     <nav class="main-header__nav">
         <ul class="main-header__item-list">
             <% for (let menu of menus) { %>
-            <li class="main-header__item"><a class="active" href="<%= menu.href%>"id="<%= menu.id%>"><%= menu.name %></a></li>
+            <li class="main-header__item"><a class="<%= pagePath === menu.href ? 'active': '' %>" href="<%= menu.href%>"id="<%= menu.id%>"><%= menu.name %></a></li>
             <% } %>
         </ul>
     </nav>
