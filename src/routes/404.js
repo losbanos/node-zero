@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const {rootDir} = require('../utils/path');
+const {handle404}  = require('../controllers/errors');
 
-module.exports = express.Router().use((req, res, next) => {
-    res.status(404).render('404', {docTitle: 'Not Found', lang: req.currentLanguage, pagePath: ''});
-})
+module.exports = express.Router().use(handle404);

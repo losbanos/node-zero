@@ -4,9 +4,9 @@ const cookieParser = require('cookie-parser');
 const {publicDir, rootDir} = require('./utils/path');
 const {routerAdmin} = require('./routes/admin');
 const routerShop = require('./routes/shop');
-const router404 = require('./routes/404');
 const path = require('path');
 const handleLocale = require('./routes/handleLocale');
+const {handle404} = require('./controllers/errors');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -19,6 +19,6 @@ app.use(express.static(publicDir));
 app.use(handleLocale);
 app.use('/admin', routerAdmin);
 app.use(routerShop);
-app.use(router404);
+app.use(handle404);
 
 app.listen(4000);
