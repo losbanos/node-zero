@@ -1,7 +1,6 @@
 const path = require('path');
 const {setExpireTime} = require('../utils/cookieUtils');
 const {Product} = require('../model/product');
-
 const getAddProduct = (req, res, next) => {
     // res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
     res.render('add-product', {docTitle: '상품 등록', pagePath: '/admin/add-product', lang: req.currentLanguage});
@@ -14,8 +13,11 @@ const getPostProduct = (req, res, next) => {
 }
 
 const getIndex = (req, res, next) => {
+    Product.fetchAll(products => {
+        res.cookie('views', visitCount, {expires: setExpireTime(2)})
+            .render('shop', {docTitle: '샵', pagePath: '/', products: products, lang: req.currentLanguage});
+    });
     const visitCount = parseInt(req.cookies.views) + 1 || 1;
-    res.cookie('views', visitCount, {expires: setExpireTime(2)}).render('shop', {docTitle: '샵', pagePath: '/', products: Product.fetchAll(), lang: req.currentLanguage});
 }
 
 
