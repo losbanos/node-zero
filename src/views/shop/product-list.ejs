@@ -1,7 +1,7 @@
-<%- include('common/head') %>
+<%- include('../common/head') %>
 </head>
 <body>
-<%- include('common/nav') %>
+<%- include('../common/nav') %>
 <main>
     <% if(products.length) {%>
         <h1><% for (let product of products) {%></h1>
@@ -12,4 +12,4 @@
         <h1> 등록된 상품이 없어 !!</h1>
     <%}%>
 </main>
-<%- include('common/end') %>
+<%- include('../common/end') %>
