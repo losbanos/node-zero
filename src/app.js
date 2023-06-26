@@ -5,7 +5,7 @@ const {publicDir, rootDir} = require('./utils/path');
 const {routerAdmin} = require('./routes/admin');
 const routerShop = require('./routes/shop');
 const path = require('path');
-const handleLocale = require('./routes/handleLocale');
+const initData = require('./controllers/initData');
 const {handle404} = require('./controllers/errors');
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser())
 app.use(express.static(publicDir));
-app.use(handleLocale);
+app.use(initData);
 app.use('/admin', routerAdmin);
 app.use(routerShop);
 app.use(handle404);

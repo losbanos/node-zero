@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const {re} = require('@babel/core/lib/vendor/import-meta-resolve');
 
 const p = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json');
 const getProductsFromFile = (cb) => {

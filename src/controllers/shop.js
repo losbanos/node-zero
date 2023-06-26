@@ -1,17 +1,13 @@
-const path = require('path');
 const {setExpireTime} = require('../utils/cookieUtils');
 const {Product} = require('../model/product');
-const getAddProduct = (req, res, next) => {
-    // res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
-    res.render('admin/add-product', {docTitle: '상품 등록', pagePath: '/admin/add-product', lang: req.currentLanguage});
-}
+const menu = require('../model/nav');
 
-const getPostProduct = (req, res, next) => {
-    const product = new Product(req.body.title, req.body.description);
-    product.save();
-    res.redirect(path.resolve(__dirname, '/'));
-}
-
+/**
+ * For Public User Middleware
+ * @param req
+ * @param res
+ * @param next
+ */
 const getIndex = (req, res, next) => {
     const visitCount = parseInt(req.cookies.views) + 1 || 1;
     res.cookie('views', visitCount, {expires: setExpireTime(2)})
@@ -23,10 +19,18 @@ const getProductList = (req, res, next) => {
         res.render('shop/product-list', {docTitle: '상품 목록', pagePath: '/product-list', products: products, lang: req.currentLanguage});
     });
 }
+const getCartList = (req, res, netx) => {
+
+}
+
+const getCheckout = (req, res, next) => {
+
+}
+
 
 module.exports = {
     getIndex,
     getProductList,
-    getAddProduct,
-    getPostProduct
+    getCartList,
+    getCheckout
 }

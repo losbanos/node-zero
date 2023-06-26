@@ -1,12 +1,12 @@
 const path = require('path');
-
+const menu = require('../model/nav');
 const getLogin = (req, res, next) => {
     const {isLogined} = req.cookies;
     if (isLogined) {
         res.status(301).cookie('isLogined', false, {maxAge: 0})
         res.redirect(path.resolve(__dirname, '/'));
     } else {
-        res.render('login', {docTitle: '로그인', pagePath: '/login', lang: req.currentLanguage});
+        res.render('login', {docTitle: '로그인', pagePath: '/login', lang: req.currentLanguage, menus: menu.getMenus()});
     }
 
 }
