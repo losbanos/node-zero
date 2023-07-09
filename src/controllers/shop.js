@@ -10,8 +10,10 @@ const menu = require('../model/nav');
  */
 const getIndex = (req, res, next) => {
     const visitCount = parseInt(req.cookies.views) + 1 || 1;
-    res.cookie('views', visitCount, {expires: setExpireTime(2)})
-        .render('shop/index', {docTitle: '메인', pagePath: '/', lang: req.currentLanguage});
+    Product.fetchAll(products => {
+        res.cookie('views', visitCount, {expires: setExpireTime(2)})
+            .render('shop', {docTitle: '메인', pagePath: '/', lang: req.currentLanguage, products: products});
+    })
 }
 
 const getProductList = (req, res, next) => {
@@ -20,11 +22,15 @@ const getProductList = (req, res, next) => {
     });
 }
 const getCartList = (req, res, netx) => {
-
+    res.render('shop/cart', {
+        docTitle: '장바구니',
+        pagePath: '/cart',
+        lang: req.currentLanguage
+    });
 }
 
 const getCheckout = (req, res, next) => {
-
+    res.render('shop/checkout', {pagePath: '/checkout', docTitle: '결제확인', lang: req.currentLanguage});
 }
 
 

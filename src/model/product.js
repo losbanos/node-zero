@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 
 const p = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json');
+console.log('p = ', p);
 const getProductsFromFile = (cb) => {
     fs.readFile(p, (err, data) => {
         if (err) {
@@ -14,7 +15,7 @@ const getProductsFromFile = (cb) => {
 class Product {
     constructor(title, description) {
         this.title = title;
-        this.description = description;
+        this.description = description ? description: '';
     }
 
     save() {

@@ -3,6 +3,21 @@
 <body>
 <%- include('../common/nav') %>
 <main>
+    <% if(products.length) {%>
+        <h1>등록된 상품 목록</h1>
+        <ol>
+            <% for (let product of products) {%>
+                <li>
+                    <h3><%= product.title %></h3>
+                    <p><%= product.description %></p>
+                </li>
+            <% }%>
+        </ol>
+    <%} else {%>
+        <h1> 등록된 상품이 없어 !!</h1>
+    <%}%>
+</main>
+<main>
 
 </main>
 <%- include('../common/end') %>
