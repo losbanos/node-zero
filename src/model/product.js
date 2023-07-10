@@ -12,9 +12,11 @@ const getProductsFromFile = (cb) => {
     });
 }
 class Product {
-    constructor(title, description) {
-        this.title = title;
-        this.description = description ? description: '';
+    constructor(params) {
+        this.title = params.title;
+        this.description = params.description ? params.description: '';
+        this.imageUrl = params.imageUrl;
+        this.price = params.price;
     }
 
     save() {

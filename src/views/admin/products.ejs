@@ -9,7 +9,12 @@
             <% for (let product of products) {%>
                 <li>
                     <h3><%= product.title %></h3>
-                    <p><%= product.description %></p>
+                    <p><img src="<%= product.imageUrl %>"/></p>
+                    <p>가격: <%= product.price %></p>
+                    <p>
+                        <strong>설명</strong>
+                        <span><%= product.description %></span>
+                    </p>
                 </li>
             <% }%>
         </ol>

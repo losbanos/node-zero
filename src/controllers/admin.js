@@ -7,7 +7,12 @@ const path = require('path');
  * @param next
  */
 const adminPostProduct = (req, res, next) => {
-    const product = new Product(req.body.title, req.body.description);
+    const product = new Product({
+        title: req.body.title, 
+        description: req.body.description,
+        imageUrl: req.body.imageUrl,
+        price: req.body.price
+    });
     product.save();
     res.redirect('/admin/products')
 }
