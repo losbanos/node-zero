@@ -3,12 +3,22 @@
 <body>
 <%- include('../common/nav') %>
 <main>
-    <% if(products.length) {%>
-        <h1><% for (let product of products) {%></h1>
-            <p><%= product.title %></p>
-            <p><%= product.description %></p>
-        <% }%>
-    <%} else {%>
+    <% if (products.length) { %>
+        <h1>상품 목록</h1>
+        <ol>
+            <% for (let product of products) {%>
+                <li>
+                    <h3><%= product.title %></h3>
+                    <p><img src="<%= product.imageUrl %>"/></p>
+                    <p>가격: <%= product.price %></p>
+                    <p>
+                        <strong>설명</strong>
+                        <span><%= product.description %></span>
+                    </p>
+                </li>
+            <% }%>
+        </ol>
+    <% } else { %>
         <h1> 등록된 상품이 없어 !!</h1>
     <%}%>
 </main>
