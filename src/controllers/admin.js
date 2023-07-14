@@ -31,8 +31,17 @@ const adminAddProduct = (req, res, next) => {
     res.render('admin/add-product', {docTitle: '상품 등록', pagePath: '/admin/add-product', lang: req.currentLanguage});
 }
 
+const adminEditProduct = (req, res, next) => {
+    res.render('admin/edit-product', {docTitle: '상품 수정', pagePath: '/admin/edit-product', lang: req.currentLanguage});
+}
+
+const adminRemoveProduct = (req, res, next) => {
+
+}
 module.exports = {
     adminAddProduct,
     adminGetProducts,
-    adminPostProduct
+    adminPostProduct,
+    adminEditProduct,
+    adminRemoveProduct
 }

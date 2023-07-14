@@ -33,10 +33,22 @@ const getCheckout = (req, res, next) => {
     res.render('shop/checkout', {pagePath: '/checkout', docTitle: '결제확인', lang: req.currentLanguage});
 }
 
+const addToCart = (req, res, next) => {
 
+}
+
+const getOrders = (req, res, next) => {
+    res.render('shop/orders', {
+        pagePath: '/oders',
+        docTitle: '주문서',
+        lang: req.currentLanguage
+    })
+}
 module.exports = {
     getIndex,
     getProductList,
     getCartList,
-    getCheckout
+    getCheckout,
+    addToCart,
+    getOrders
 }

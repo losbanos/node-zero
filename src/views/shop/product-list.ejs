@@ -15,6 +15,9 @@
                         <strong>설명</strong>
                         <span><%= product.description %></span>
                     </p>
+                    <form action="/add-to-cart" method="POST">
+                        <button type="submit" class="btn">장바구니 담기</button>
+                    </form>
                 </li>
             <% }%>
         </ol>

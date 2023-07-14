@@ -15,6 +15,10 @@
                         <strong>설명</strong>
                         <span><%= product.description %></span>
                     </p>
+                    <a href="/admin/edit-product" class="btn">수정</a>
+                    <form action="/admin/remove-product" method="POST">
+                        <button type="submit" class="btn">삭제</button>
+                    </form>
                 </li>
             <% }%>
         </ol>

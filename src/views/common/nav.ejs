@@ -1,5 +1,9 @@
 <header class="main-header">
-    <% var menus = [{name: 'Shop1', href:'/', id: 'shop'}, {name: 'Add Product', href:'/admin/add-product', id:'add-product'}, {name: 'Login', id: 'login', href:'/login'}]%>
+    <% var menus = [{name: 'Shop1', href:'/', id: 'shop'},
+        {name: 'Add Product', href:'/admin/add-product', id:'add-product'},
+        {name: '주문 내역', href:'/orders', id: 'orders'},
+        {name: '장바구니', href:'/cart', id: 'cart'},
+        {name: 'Login', id: 'login', href:'/login'}]%>
     <nav class="main-header__nav">
         <ul class="main-header__item-list">
             <% for (let menu of menus) { %>
