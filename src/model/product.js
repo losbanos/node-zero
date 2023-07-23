@@ -20,6 +20,7 @@ class Product {
     }
 
     save() {
+        this.id = new Date().getTime().toString();
         getProductsFromFile(productsData => {
             productsData.push(this);
             fs.writeFile(p, JSON.stringify(productsData), err => {

@@ -12,7 +12,7 @@ const getIndex = (req, res, next) => {
     const visitCount = parseInt(req.cookies.views) + 1 || 1;
     Product.fetchAll(products => {
         res.cookie('views', visitCount, {expires: setExpireTime(2)})
-            .render('shop', {docTitle: '메인', pagePath: '/', lang: req.currentLanguage, products: products});
+            .render('shop/product-list', {docTitle: '메인', pagePath: '/', lang: req.currentLanguage, products: products});
     })
 }
 
