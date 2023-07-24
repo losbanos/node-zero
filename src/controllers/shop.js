@@ -47,7 +47,9 @@ const getOrders = (req, res, next) => {
 
 const getProductDetail = (req, res, next) => {
     const productId = req.params.productId;
-    console.log('product Id  ', productId);
+    Product.findById(productId, product => {
+        console.log('product = ', product);
+    });
     res.redirect('/');
 }
 
