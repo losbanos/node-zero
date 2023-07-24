@@ -44,11 +44,23 @@ const getOrders = (req, res, next) => {
         lang: req.currentLanguage
     })
 }
+
+const getProductDetail = (req, res, next) => {
+    const productId = req.params.productId;
+    console.log('product Id  ', productId);
+    res.redirect('/');
+}
+
+const deleteProduct = (req, res, next) => {
+
+}
 module.exports = {
     getIndex,
     getProductList,
     getCartList,
     getCheckout,
     addToCart,
-    getOrders
+    getOrders,
+    getProductDetail,
+    deleteProduct
 }
