@@ -48,9 +48,13 @@ const getOrders = (req, res, next) => {
 const getProductDetail = (req, res, next) => {
     const productId = req.params.productId;
     Product.findById(productId, product => {
-        console.log('product = ', product);
+        res.render('shop/product-detail', {
+            docTitle: product.title,
+            pagePath: '/shop/product-list',
+            lang: req.currentLanguage,
+            product: product
+        });
     });
-    res.redirect('/');
 }
 
 const deleteProduct = (req, res, next) => {

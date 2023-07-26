@@ -1,4 +1,19 @@
 <%- include('../common/head') %>
 </head>
 <body>
+<%- include('../common/nav') %>
+<main>
+    <h1><%= product.title%>></h1>
+    <hr>
+    <div style="text-align: center">
+        <img src="<%= product.imageUrl%>" alt="<% product.title%>">
+    </div>
+    <div style="text-align: center">
+        <h2><%= product.price%></h2>
+        <p><%= product.description %></p>
+        <form action="/add-to-cart" method="post">
+            <button type="submit" class="btn">장바구니 추가 하기</button>
+        </form>
+    </div>
+</main>
 <%- include('../common/end') %>
