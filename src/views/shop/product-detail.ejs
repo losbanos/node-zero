@@ -11,9 +11,7 @@
     <div style="text-align: center">
         <h2><%= product.price%></h2>
         <p><%= product.description %></p>
-        <form action="/add-to-cart" method="post">
-            <button type="submit" class="btn">장바구니 추가 하기</button>
-        </form>
+        <%- include('../common/add-to-cart', {product: product}) %>
     </div>
 </main>
 <%- include('../common/end') %>
