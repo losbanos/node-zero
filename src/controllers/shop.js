@@ -1,7 +1,7 @@
 const {setExpireTime} = require('../utils/cookieUtils');
 const {Product} = require('../model/product');
 const menu = require('../model/nav');
-
+const Cart = require('../model/cart');
 /**
  * For Public User Middleware
  * @param req
@@ -35,7 +35,10 @@ const getCheckout = (req, res, next) => {
 
 const addToCart = (req, res, next) => {
     const productId = req.body.product_id;
-    console.log('productId = ', productId);
+    Product.findById(productId, (product) => {
+        console.log('product = ', product);
+        Cart.addProductToCart(productId, product.price)
+    })
     res.redirect('/cart');
 }
 
