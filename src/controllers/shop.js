@@ -36,9 +36,8 @@ const getCheckout = (req, res, next) => {
 const addToCart = (req, res, next) => {
     const productId = req.body.product_id;
     Product.findById(productId, (product) => {
-        console.log('product = ', product);
-        Cart.addProductToCart(productId, product.price)
-    })
+        Cart.addProductToCart(productId, product.price);
+    });
     res.redirect('/cart');
 }
 
