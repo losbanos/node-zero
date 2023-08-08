@@ -27,12 +27,22 @@ const adminGetProducts = (req, res, next) => {
     })
 }
 const adminAddProduct = (req, res, next) => {
-    // res.sendFile(path.join(rootDir, 'views', 'add-product.html'));
-    res.render('admin/add-product', {docTitle: '상품 등록', pagePath: '/admin/add-product', lang: req.currentLanguage});
+    res.render('admin/edit-product', {docTitle: '상품 등록', pagePath: '/admin/add-product', lang: req.currentLanguage});
 }
 
 const adminEditProduct = (req, res, next) => {
-    res.render('admin/edit-product', {docTitle: '상품 수정', pagePath: '/admin/edit-product', lang: req.currentLanguage});
+    const editMode = req.query.edit
+    if (editMode !== 'true') {
+        return res.redirect('/');
+    }
+
+    res.render('admin/edit-product',
+        {
+            docTitle: '상품 수정',
+            pagePath: '/admin/edit-product',
+            lang: req.currentLanguage,
+            editMode: editMode
+        });
 }
 
 const adminRemoveProduct = (req, res, next) => {

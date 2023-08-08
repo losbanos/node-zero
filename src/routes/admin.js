@@ -6,8 +6,8 @@ routerAdmin.get('/', adminGetProducts);
 routerAdmin.get('/products', adminGetProducts);
 routerAdmin.get('/add-product', adminAddProduct);
 routerAdmin.post('/add-product', adminPostProduct);
-routerAdmin.get('/admin/edit-product', adminEditProduct);
-routerAdmin.post('/admin/remove-product', adminRemoveProduct);
+routerAdmin.get('/edit-product/:productId', adminEditProduct);
+routerAdmin.post('remove-product', adminRemoveProduct);
 module.exports = {
     routerAdmin
 };
