@@ -31,18 +31,25 @@ const adminAddProduct = (req, res, next) => {
 }
 
 const adminEditProduct = (req, res, next) => {
-    const editMode = req.query.edit
-    if (editMode !== 'true') {
+    const editMode = req.query.editMode === 'true'
+
+    if (!editMode) {
         return res.redirect('/');
     }
 
-    res.render('admin/edit-product',
-        {
-            docTitle: '상품 수정',
+    const productId = req.params.productId;
+    Product.findById(productId, product => {
+        if (!product) {
+            return res.redirect('/');
+        }
+        res.render('admin/edit-product', {
+            docTitle: `${product.title} 상품 수정`,
             pagePath: '/admin/edit-product',
             lang: req.currentLanguage,
-            editMode: editMode
-        });
+            editMode: editMode,
+            product: product
+        })
+    });
 }
 
 const adminRemoveProduct = (req, res, next) => {

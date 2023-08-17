@@ -17,7 +17,9 @@
             <label for="description">상품 설명</label>
             <textarea name="description" id="description" rows="5"></textarea>
         </div>
-        <button type="submit">등록</button>
+        <button type="submit">
+            <% if(editMode) {%> 수정 완료<%} else {%> 등록 하기 <% }%>
+        </button>
     </form>
 </main>
 <%- include('../common/end') %>
