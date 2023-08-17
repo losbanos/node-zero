@@ -4,18 +4,18 @@
 <body>
 <%- include('../common/nav') %>
 <main>
-    <form class="product-form" action="/admin/add-product" method="POST">
+    <form class="product-form" action="<%= data.actionURL%>" method="POST">
         <div class="form-control">
-            <label for="title">상품명</label>
-            <input type="text" name="title" id="title" />
-            <label for="imageUrl">이미지 경로</label>
-            <input type="text" name="imageUrl" id="imageUrl" />
+            <p><label for="title">상품명</label></p>
+            <input type="text" name="title" id="title" value="<%= data.product.title%>"/>
+            <p><label for="imageUrl">이미지 경로</label></p>
+            <input type="text" name="imageUrl" id="imageUrl" value="<%= data.product.imageUrl%>"/>
         </div>
         <div class="form-control">
-            <label for="price">가격</label>
-            <input type="text" name="price" id="price" />
-            <label for="description">상품 설명</label>
-            <textarea name="description" id="description" rows="5"></textarea>
+            <p><label for="price">가격</label></p>
+            <input type="text" name="price" id="price" value="<%= data.product.price%>"/>
+            <p><label for="description">상품 설명</label></p>
+            <textarea name="description" id="description" rows="5"><%= data.product.description%></textarea>
         </div>
         <button type="submit">
             <% if(editMode) {%> 수정 완료<%} else {%> 등록 하기 <% }%>

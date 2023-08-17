@@ -27,7 +27,21 @@ const adminGetProducts = (req, res, next) => {
     })
 }
 const adminAddProduct = (req, res, next) => {
-    res.render('admin/edit-product', {docTitle: '상품 등록', pagePath: '/admin/add-product', lang: req.currentLanguage});
+    res.render('admin/edit-product', {
+        docTitle: '상품 등록',
+        pagePath: '/admin/add-product',
+        lang: req.currentLanguage,
+        editMode: false,
+        data: {
+            product: {
+                titie: '',
+                price: '',
+                imageUrl: '',
+                description: ''
+            },
+            actionURL: '',
+        }
+    });
 }
 
 const adminEditProduct = (req, res, next) => {
@@ -47,7 +61,10 @@ const adminEditProduct = (req, res, next) => {
             pagePath: '/admin/edit-product',
             lang: req.currentLanguage,
             editMode: editMode,
-            product: product
+            data: {
+                actionUrl: '/admin/edit-product',
+                product: product
+            }
         })
     });
 }
