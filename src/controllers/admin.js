@@ -6,7 +6,7 @@ const path = require('path');
  * @param res
  * @param next
  */
-const adminPostProduct = (req, res, next) => {
+const adminPostAddProduct = (req, res, next) => {
     const product = new Product({
         title: req.body.title, 
         description: req.body.description,
@@ -26,7 +26,7 @@ const adminGetProducts = (req, res, next) => {
         })
     })
 }
-const adminAddProduct = (req, res, next) => {
+const adminGetAddProductView = (req, res, next) => {
     res.render('admin/edit-product', {
         docTitle: '상품 등록',
         pagePath: '/admin/add-product',
@@ -44,7 +44,7 @@ const adminAddProduct = (req, res, next) => {
     });
 }
 
-const adminEditProduct = (req, res, next) => {
+const adminGetEditProduct = (req, res, next) => {
     const editMode = req.query.editMode === 'true'
 
     if (!editMode) {
@@ -69,13 +69,17 @@ const adminEditProduct = (req, res, next) => {
     });
 }
 
+const adminPostEditProduct = (req, res, next) => {
+    return res.redirect('/');
+}
 const adminRemoveProduct = (req, res, next) => {
 
 }
 module.exports = {
-    adminAddProduct,
+    adminGetAddProductView,
     adminGetProducts,
-    adminPostProduct,
-    adminEditProduct,
-    adminRemoveProduct
+    adminPostAddProduct,
+    adminGetEditProduct,
+    adminRemoveProduct,
+    adminPostEditProduct
 }
