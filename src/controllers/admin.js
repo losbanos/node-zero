@@ -8,6 +8,7 @@ const path = require('path');
  */
 const adminPostAddProduct = (req, res, next) => {
     const product = new Product({
+        id: null,
         title: req.body.title, 
         description: req.body.description,
         imageUrl: req.body.imageUrl,
@@ -34,6 +35,7 @@ const adminGetAddProductView = (req, res, next) => {
         editMode: false,
         data: {
             product: {
+                id: null,
                 titie: '',
                 price: '',
                 imageUrl: '',
@@ -70,7 +72,16 @@ const adminGetEditProduct = (req, res, next) => {
 }
 
 const adminPostEditProduct = (req, res, next) => {
-    return res.redirect('/');
+    const productParams = {
+        id: req.body.productId,
+        title: req.body.title,
+        imageUrl: req.body.imageUrl,
+        description: req.body.description,
+        price: req.body.price
+    }
+    const product = new Product(productParams)
+    product.save();
+    return res.redirect('/admin/products');
 }
 const adminRemoveProduct = (req, res, next) => {
 

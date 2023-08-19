@@ -4,7 +4,7 @@
 <body>
 <%- include('../common/nav') %>
 <main>
-    <form class="product-form" action="<%= data.actionURL%>" method="POST">
+    <form class="product-form" action="<%= data.actionUrl%>" method="POST">
         <div class="form-control">
             <p><label for="title">상품명</label></p>
             <input type="text" name="title" id="title" value="<%= data.product.title%>"/>
@@ -17,6 +17,7 @@
             <p><label for="description">상품 설명</label></p>
             <textarea name="description" id="description" rows="5"><%= data.product.description%></textarea>
         </div>
+        <input type="hidden" value="<%= data.product.id %>" name="productId"/>
         <button type="submit">
             <% if(editMode) {%> 수정 완료<%} else {%> 등록 하기 <% }%>
         </button>

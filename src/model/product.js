@@ -13,6 +13,7 @@ const getProductsFromFile = (cb) => {
 }
 class Product {
     constructor(params) {
+        this.id = params.id;
         this.title = params.title;
         this.description = params.description ? params.description: '';
         this.imageUrl = params.imageUrl;
@@ -20,9 +21,14 @@ class Product {
     }
 
     save() {
-        this.id = new Date().getTime().toString();
         getProductsFromFile(productsData => {
-            productsData.push(this);
+            if (this.id) {
+                const existedProductIndex = productsData.findIndex(product => product.id === this.id);
+                productsData.splice(existedProductIndex, 1, this);
+            } else {
+                this.id = new Date().getTime().toString();
+                productsData.push(this);
+            }
             fs.writeFile(p, JSON.stringify(productsData), err => {
                 console.log('error write = ', err);
             })
