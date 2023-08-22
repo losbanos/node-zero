@@ -1,6 +1,6 @@
 const express = require('express');
-const {adminGetProducts, adminEditProduct, adminRemoveProduct, adminGetEditProduct,
-    adminUpdateProduct, adminPostEditProduct, adminPostAddProduct, adminGetAddProductView
+const {adminGetProducts, adminGetEditProduct,
+     adminPostEditProduct, adminPostAddProduct, adminGetAddProductView, adminPostRemoveProduct
 } = require('../controllers/admin');
 const routerAdmin = express.Router();
 
@@ -10,7 +10,7 @@ routerAdmin.get('/add-product', adminGetAddProductView);
 routerAdmin.post('/add-product', adminPostAddProduct);
 routerAdmin.get('/edit-product/:productId', adminGetEditProduct);
 routerAdmin.post('/edit-product', adminPostEditProduct);
-routerAdmin.post('remove-product', adminRemoveProduct);
+routerAdmin.post('/remove-product', adminPostRemoveProduct);
 
 module.exports = {
     routerAdmin

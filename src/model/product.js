@@ -35,6 +35,19 @@ class Product {
         })
     }
 
+    static remove(productId, cb) {
+        getProductsFromFile(productData => {
+            const notMatchedProducts = productData.filter(product => product.id !== productId);
+
+            fs.writeFile(p, JSON.stringify(notMatchedProducts), (err => {
+                if (err) throw err;
+                else {
+                    cb? cb(): null;
+                }
+            }));
+        })
+    }
+
     static fetchAll(cb) {
         getProductsFromFile(cb);
     }

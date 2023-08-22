@@ -83,14 +83,24 @@ const adminPostEditProduct = (req, res, next) => {
     product.save();
     return res.redirect('/admin/products');
 }
-const adminRemoveProduct = (req, res, next) => {
-
+const adminPostRemoveProduct = (req, res, next) => {
+    const productId = req.body.productId;
+    Product.remove(productId, () => {
+        Product.fetchAll(products => {
+            res.render('admin/products', {
+                pagePath: '/admin/products',
+                docTitle: '상품목록',
+                lang: req.currentLanguage,
+                products: products
+            })
+        })
+    })
 }
 module.exports = {
     adminGetAddProductView,
     adminGetProducts,
     adminPostAddProduct,
     adminGetEditProduct,
-    adminRemoveProduct,
+    adminPostRemoveProduct,
     adminPostEditProduct
 }
