@@ -86,14 +86,7 @@ const adminPostEditProduct = (req, res, next) => {
 const adminPostRemoveProduct = (req, res, next) => {
     const productId = req.body.productId;
     Product.remove(productId, () => {
-        Product.fetchAll(products => {
-            res.render('admin/products', {
-                pagePath: '/admin/products',
-                docTitle: '상품목록',
-                lang: req.currentLanguage,
-                products: products
-            })
-        })
+        res.redirect('/admin/products');
     })
 }
 module.exports = {
