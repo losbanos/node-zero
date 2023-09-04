@@ -22,11 +22,23 @@ const getProductList = (req, res, next) => {
     });
 }
 const getCartList = (req, res, netx) => {
-    res.render('shop/cart', {
-        docTitle: '장바구니',
-        pagePath: '/cart',
-        lang: req.currentLanguage
-    });
+    Cart.getCartProduct(cartData => {
+        Product.fetchAll(products => {
+            const cartProducts = [];
+            for(const product of products) {
+                const cartProductData = cartData.products.find(cart => cart.id === product.id);
+                if (cartProductData) {
+                    cartProducts.push({...product, qty: cartProductData.qty});
+                }
+            }
+            res.render('shop/cart', {
+                docTitle: '장바구니',
+                pagePath: '/cart',
+                lang: req.currentLanguage,
+                products: cartProducts
+            });
+        })
+    })
 }
 
 const getCheckout = (req, res, next) => {
