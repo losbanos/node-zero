@@ -4,7 +4,7 @@
 <%- include('../common/nav') %>
 <main>
     <% if(products.length) {%>
-        <h1>등록된 상품 목록</h1>
+        <h1>장바구니 목록</h1>
         <ol>
             <% for (let product of products) {%>
                 <li>
@@ -15,9 +15,8 @@
                         <strong>설명</strong>
                         <span><%= product.description %></span>
                     </p>
-                    <a href="/admin/edit-product/<%=product.id%>?editMode=true" class="btn">수정</a>
-                    <form action="/admin/remove-product" method="POST">
-                        <button type="submit" class="btn">삭제</button>
+                    <form action="/remove-cart-product" method="POST">
+                        <button type="submit" class="btn">장바구니에서 삭제</button>
                         <input type="hidden" name="productId" value="<%= product.id%>" />
                     </form>
                 </li>

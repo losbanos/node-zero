@@ -21,7 +21,8 @@ const getProductList = (req, res, next) => {
         res.render('shop/product-list', {docTitle: '상품 목록', pagePath: '/product-list', products: products, lang: req.currentLanguage});
     });
 }
-const getCartList = (req, res, netx) => {
+
+const getCartProduct = (req, res) => {
     Cart.getCartProduct(cartData => {
         Product.fetchAll(products => {
             const cartProducts = [];
@@ -40,13 +41,16 @@ const getCartList = (req, res, netx) => {
         })
     })
 }
+const getCartList = (req, res, next) => {
+    getCartProduct(req, res)
+}
 
 const getCheckout = (req, res, next) => {
     res.render('shop/checkout', {pagePath: '/checkout', docTitle: '결제확인', lang: req.currentLanguage});
 }
 
 const addToCart = (req, res, next) => {
-    const productId = req.body.product_id;
+    const productId = req.body.productId;
     Product.findById(productId, (product) => {
         Cart.addProductToCart(productId, product.price);
     });
@@ -73,9 +77,17 @@ const getProductDetail = (req, res, next) => {
     });
 }
 
-const deleteProduct = (req, res, next) => {
-
+const postRemoveCartProduct = (req, res, next) => {
+    const productId = req.body.productId;
+    Product.findById(productId, product => {
+        console.log('product = ', product);
+        Cart.removeProduct(productId, product.price, () => {
+            getCartProduct(req, res);
+        });
+    })
 }
+
+
 module.exports = {
     getIndex,
     getProductList,
@@ -84,5 +96,5 @@ module.exports = {
     addToCart,
     getOrders,
     getProductDetail,
-    deleteProduct
+    postRemoveCartProduct
 }

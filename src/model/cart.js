@@ -34,7 +34,7 @@ class Cart {
 
     }
 
-    static removeProduct(id, price) {
+    static removeProduct(id, price, cb) {
         fs.readFile(cartFilePath, (err, cartData) => {
             if (err) {
                 return;
@@ -46,9 +46,13 @@ class Cart {
             updatedProduct.products = updatedProduct.products.filter(product => product.id !== id);
 
             fs.writeFile(cartFilePath, JSON.stringify(updatedProduct), err => {
-                if (err) {
+                if (!err) {
+                    cb? cb() : null;
+                } else {
                     console.log(err);
+                    cb ? cb([]): null
                 }
+
             })
 
         })
@@ -64,5 +68,6 @@ class Cart {
             }
         });
     }
+
 }
 module.exports = Cart;
