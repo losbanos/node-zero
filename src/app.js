@@ -7,6 +7,7 @@ const routerShop = require('./routes/shop');
 const path = require('path');
 const initData = require('./controllers/initData');
 const {handle404} = require('./controllers/errors');
+const mongoConnect = require('./utils/database');
 
 const app = express();
 app.set('view engine', 'ejs');
@@ -21,4 +22,7 @@ app.use('/admin', routerAdmin);
 app.use(routerShop);
 app.use(handle404);
 
-app.listen(4000);
+mongoConnect(client => {
+    console.log(client);
+    app.listen(4000);
+})
