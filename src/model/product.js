@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const Cart = require('./cart');
 const p = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json');
+const {getDB} = require('../utils/database');
 const getProductsFromFile = (cb) => {
     fs.readFile(p, (err, data) => {
         if (err) {
@@ -21,18 +22,7 @@ class Product {
     }
 
     save() {
-        getProductsFromFile(productsData => {
-            if (this.id) {
-                const existedProductIndex = productsData.findIndex(product => product.id === this.id);
-                productsData.splice(existedProductIndex, 1, this);
-            } else {
-                this.id = new Date().getTime().toString();
-                productsData.push(this);
-            }
-            fs.writeFile(p, JSON.stringify(productsData), err => {
-                console.log('error write = ', err);
-            })
-        })
+
     }
 
     static remove(productId, cb) {
