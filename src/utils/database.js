@@ -6,7 +6,7 @@ const mongoConnect = (callback) => {
     fs.readFile(path.join(path.dirname(require.main.filename), 'data', 'account.json'), (err, accountData) => {
         if (!err) {
             const accountInfo = JSON.parse(accountData);
-            mongoClient.connect(`mongodb+srv://${accountInfo.id}/?retryWrites=true&w=majority`, {
+            mongoClient.connect(`mongodb+srv://${accountInfo.id}/shop?retryWrites=true&w=majority`, {
                 tlsAllowInvalidHostnames: true,
                 tlsAllowInvalidCertificates: true
             })
