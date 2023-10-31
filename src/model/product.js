@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const Cart = require('./cart');
 const p = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json');
-const {getDB} = require('../utils/database');
+const {getDb} = require('../utils/database');
 const getProductsFromFile = (cb) => {
     fs.readFile(p, (err, data) => {
         if (err) {
@@ -22,7 +22,8 @@ class Product {
     }
 
     save() {
-
+        const db = getDb();
+        db.collection('products').insertOne(this).then(result => console.log(result)).catch(error => console.log('error = ', error));
     }
 
     static remove(productId, cb) {

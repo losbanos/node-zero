@@ -7,7 +7,7 @@ const routerShop = require('./routes/shop');
 const path = require('path');
 const initData = require('./controllers/initData');
 const {handle404} = require('./controllers/errors');
-const mongoConnect = require('./utils/database');
+const {mongoConnect} = require('./utils/database');
 
 const app = express();
 app.set('view engine', 'ejs');

@@ -1,5 +1,6 @@
 const {Product} = require('../model/product');
 const path = require('path');
+
 /**
  * For Admin Manage Middleware
  * @param req

@@ -2,6 +2,7 @@ const mongodb = require('mongodb');
 const mongoClient = mongodb.MongoClient;
 const path = require('path');
 const fs = require('fs');
+let db;
 const mongoConnect = (callback) => {
     fs.readFile(path.join(path.dirname(require.main.filename), 'data', 'account.json'), (err, accountData) => {
         if (!err) {
@@ -12,6 +13,7 @@ const mongoConnect = (callback) => {
             })
             .then(client => {
                 console.log('Connected !!');
+                db = client.db();
                 callback(client);
             })
             .catch(error => {
@@ -19,7 +21,17 @@ const mongoConnect = (callback) => {
             })
             }
     })
-
 }
 
-module.exports = mongoConnect;
+const getDb = () => {
+    if (db) {
+        return db;
+    }
+
+    throw 'No Database Found';
+}
+
+module.exports = {
+    mongoConnect,
+    getDb
+};
