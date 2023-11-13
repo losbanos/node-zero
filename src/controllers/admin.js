@@ -15,8 +15,12 @@ const adminPostAddProduct = (req, res, next) => {
         imageUrl: req.body.imageUrl,
         price: req.body.price
     });
-    product.save();
-    res.redirect('/admin/products')
+    product.save().then(result => {
+        res.redirect('/admin/products');
+    }).catch(error => {
+        console.log(error);
+    })
+
 }
 const adminGetProducts = (req, res, next) => {
     Product.fetchAll(products => {

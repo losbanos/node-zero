@@ -23,7 +23,10 @@ class Product {
 
     save() {
         const db = getDb();
-        db.collection('products').insertOne(this).then(result => console.log(result)).catch(error => console.log('error = ', error));
+        return db.collection('products').insertOne(this).then(result => {
+            console.log(result);
+            return result;
+        }).catch(error => console.log('error = ', error));
     }
 
     static remove(productId, cb) {
@@ -40,7 +43,15 @@ class Product {
     }
 
     static fetchAll(cb) {
-        getProductsFromFile(cb);
+        const db = getDb();
+        db.collection('products').find().toArray().then(products => {
+            console.log('products = ', products);
+            cb(products);
+            return products;
+        }).catch(error => {
+            console.log(error);
+        })
+        // getProductsFromFile(cb);
     }
 
     static findById(productId, cb) {
