@@ -3,6 +3,7 @@ const fs = require('fs');
 const Cart = require('./cart');
 const p = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json');
 const {getDb} = require('../utils/database');
+
 const getProductsFromFile = (cb) => {
     fs.readFile(p, (err, data) => {
         if (err) {
@@ -23,10 +24,26 @@ class Product {
 
     save() {
         const db = getDb();
-        return db.collection('products').insertOne(this).then(result => {
-            console.log(result);
-            return result;
-        }).catch(error => console.log('error = ', error));
+        let resultProduct;
+        if (this.id) {
+            Product.fetchAll(products => {
+                if (products.length) {
+                    const existedProduct = products.find(product => product.id === this.id);
+                }
+            })
+        } else {
+            this.id = new Date().getTime().toString();
+            resultProduct = db.collection('products').insertOne(this)
+                .then(res => {
+                    console.log('insert One result = ', res);
+                    return res;
+                })
+                .catch(e => {
+                    console.error('insert one error = ', e);
+                })
+        }
+        return resultProduct;
+
     }
 
     static remove(productId, cb) {
@@ -55,9 +72,14 @@ class Product {
     }
 
     static findById(productId, cb) {
-        getProductsFromFile(products => {
-            const product = products.find(({id}) => id === productId);
-            product ? cb(product): null;
+        const db = getDb();
+        db.collection('products').findOne({
+            id: productId
+        }).then(product => {
+            console.log('product findById = ', product);
+            cb(product);
+        }).catch(e => {
+            console.error(e);
         })
     }
 }

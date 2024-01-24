@@ -4,8 +4,8 @@ const {adminGetProducts, adminGetEditProduct,
 } = require('../controllers/admin');
 const routerAdmin = express.Router();
 
-// routerAdmin.get('/', adminGetProducts);
-// routerAdmin.get('/products', adminGetProducts);
+routerAdmin.get('/', adminGetProducts);
+routerAdmin.get('/products', adminGetProducts);
 routerAdmin.get('/add-product', adminGetAddProductView);
 routerAdmin.post('/add-product', adminPostAddProduct);
 // routerAdmin.get('/edit-product/:productId', adminGetEditProduct);
