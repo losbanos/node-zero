@@ -19,13 +19,8 @@ const mongoConnect = (callback) => {
             .catch(error => {
                 console.log('Error = ', error);
             })
-            }
+        }
     })
-    // fs.readFileSync('data', 'utf-8', (error, accountData) => {
-    //     if (!error) {
-    //
-    //     }
-    // })
 }
 
 const getDb = () => {

@@ -3,7 +3,7 @@ const fs = require('fs');
 const Cart = require('./cart');
 const p = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json');
 const {getDb} = require('../utils/database');
-
+const mongodb = require('mongodb');
 const getProductsFromFile = (cb) => {
     fs.readFile(p, (err, data) => {
         if (err) {
@@ -28,7 +28,7 @@ class Product {
         if (this.id) {
             Product.fetchAll(products => {
                 if (products.length) {
-                    const existedProduct = products.find(product => product.id === this.id);
+                    const existedProduct = products.find(product => product._id === this.id);
                 }
             })
         } else {
@@ -73,9 +73,9 @@ class Product {
 
     static findById(productId, cb) {
         const db = getDb();
-        db.collection('products').findOne({
-            id: productId
-        }).then(product => {
+        db.collection('products').find({
+            _id: new mongodb.ObjectId(productId)
+        }).next().then(product => {
             console.log('product findById = ', product);
             cb(product);
         }).catch(e => {
