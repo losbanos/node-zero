@@ -24,26 +24,25 @@ class Product {
 
     save() {
         const db = getDb();
-        let resultProduct;
-        if (this.id) {
-            Product.fetchAll(products => {
-                if (products.length) {
-                    const existedProduct = products.find(product => product._id === this.id);
-                }
+        return  db.collection('products')
+            .insertOne(this)
+            .then(res => {
+                console.log('insert One result = ', res);
+                return res;
             })
-        } else {
-            this.id = new Date().getTime().toString();
-            resultProduct = db.collection('products').insertOne(this)
-                .then(res => {
-                    console.log('insert One result = ', res);
-                    return res;
-                })
-                .catch(e => {
-                    console.error('insert one error = ', e);
-                })
-        }
-        return resultProduct;
-
+            .catch(e => {
+                console.error('insert one error = ', e);
+            })
+    }
+    update(productId) {
+        getDb()
+            .collection('products')
+            .updateOne({_id: new mongodb.ObjectId(productId)}, {$set: this})
+            .then(result => {
+                console.log('update result =', result);
+                return result;
+            })
+            .catch(e => console.error(e))
     }
 
     static remove(productId, cb) {
@@ -78,6 +77,7 @@ class Product {
         }).next().then(product => {
             console.log('product findById = ', product);
             cb(product);
+            return product
         }).catch(e => {
             console.error(e);
         })

@@ -61,7 +61,7 @@ const adminGetEditProduct = (req, res, next) => {
     const productId = req.params.productId;
     Product.findById(productId, product => {
         if (!product) {
-            return res.redirect('/');
+            return res.redirect('/admin');
         }
         res.render('admin/edit-product', {
             docTitle: `${product.title} 상품 수정`,
@@ -85,7 +85,7 @@ const adminPostEditProduct = (req, res, next) => {
         price: req.body.price
     }
     const product = new Product(productParams)
-    product.save();
+    product.update(req.body.productId);
     return res.redirect('/admin/products');
 }
 const adminPostRemoveProduct = (req, res, next) => {
