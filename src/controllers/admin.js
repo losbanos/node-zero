@@ -85,7 +85,7 @@ const adminPostEditProduct = (req, res, next) => {
         price: req.body.price
     }
     const product = new Product(productParams)
-    product.update(req.body.productId);
+    product.save();
     return res.redirect('/admin/products');
 }
 const adminPostRemoveProduct = (req, res, next) => {

@@ -23,16 +23,20 @@ class Product {
     }
 
     save() {
-        const db = getDb();
-        return  db.collection('products')
-            .insertOne(this)
-            .then(res => {
-                console.log('insert One result = ', res);
-                return res;
-            })
-            .catch(e => {
-                console.error('insert one error = ', e);
-            })
+        const db = getDb().collection('products');
+        let result;
+        if (!this.id) {
+            result = db.insertOne(this)
+        }
+        else {
+            result = db.updateOne({_id: new mongodb.ObjectId(this.id)}, {$set: this})
+        }
+        return result.then(res => {
+            console.log('save and update => result');
+            return res;
+        }).catch(e => {
+            console.error(e);
+        })
     }
     update(productId) {
         getDb()
