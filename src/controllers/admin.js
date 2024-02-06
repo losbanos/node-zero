@@ -85,14 +85,15 @@ const adminPostEditProduct = (req, res, next) => {
         price: req.body.price
     }
     const product = new Product(productParams)
-    product.save();
-    return res.redirect('/admin/products');
+    product.save().then(result => {
+        return res.redirect('/admin/products');
+    })
 }
 const adminPostRemoveProduct = (req, res, next) => {
     const productId = req.body.productId;
-    Product.remove(productId, () => {
+    Product.remove(productId).then(result => {
         res.redirect('/admin/products');
-    })
+    });
 }
 module.exports = {
     adminGetAddProductView,

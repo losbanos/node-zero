@@ -26,17 +26,27 @@ class Product {
         const db = getDb().collection('products');
         let result;
         if (!this.id) {
-            result = db.insertOne(this)
+            return result = db.insertOne(this).then(res => {
+                console.log('save and update => result');
+                return res;
+            }).catch(e => {
+                console.error(e);
+            })
         }
         else {
-            result = db.updateOne({_id: new mongodb.ObjectId(this.id)}, {$set: this})
+            return result = db.updateOne({_id: new mongodb.ObjectId(this.id)}, {$set: this}).then(res => {
+                console.log('save and update => result');
+                return res;
+            }).catch(e => {
+                console.error(e);
+            })
         }
-        return result.then(res => {
-            console.log('save and update => result');
-            return res;
-        }).catch(e => {
-            console.error(e);
-        })
+        // return result.then(res => {
+        //     console.log('save and update => result');
+        //     return res;
+        // }).catch(e => {
+        //     console.error(e);
+        // })
     }
     update(productId) {
         getDb()
@@ -50,16 +60,21 @@ class Product {
     }
 
     static remove(productId, cb) {
-        getProductsFromFile(productData => {
-            const notMatchedProducts = productData.filter(product => product.id !== productId);
-            const shouldRemoveProduct = productData.find(product => product.id === productId);
-            fs.writeFile(p, JSON.stringify(notMatchedProducts), (err => {
-                if (err) throw err;
+        // getProductsFromFile(productData => {
+        //     const notMatchedProducts = productData.filter(product => product.id !== productId);
+        //     const shouldRemoveProduct = productData.find(product => product.id === productId);
+        //     fs.writeFile(p, JSON.stringify(notMatchedProducts), (err => {
+        //         if (err) throw err;
+        //
+        //         Cart.removeProduct(productId, shouldRemoveProduct.price);
+        //         cb? cb(): null;
+        //     }));
+        // })
 
-                Cart.removeProduct(productId, shouldRemoveProduct.price);
-                cb? cb(): null;
-            }));
-        })
+        return getDb().collection('products')
+            .deleteOne({_id: new mongodb.ObjectId(productId)})
+            .then(result => console.log('Delete = ', result))
+            .catch(err => console.error(err))
     }
 
     static fetchAll(cb) {
@@ -71,7 +86,6 @@ class Product {
         }).catch(error => {
             console.log(error);
         })
-        // getProductsFromFile(cb);
     }
 
     static findById(productId, cb) {
