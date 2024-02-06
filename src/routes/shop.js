@@ -3,6 +3,7 @@ const {getIndex, getProductList, getCartList, getCheckout, addToCart, getOrders,
     postRemoveCartProduct
 } = require('../controllers/shop')
 const {getGoLogin, getLogin} = require('../controllers/common')
+const {getAddUser, postAddUser} = require('../controllers/user');
 const router = express.Router();
 
 router.get('/', getIndex);
@@ -15,4 +16,6 @@ router.get('/orders', getOrders);
 router.get('/checkout', getCheckout);
 router.get('/login', getLogin)
 router.post('/gologin', getGoLogin);
+router.get('/add-user', getAddUser);
+router.post('/add-user', postAddUser);
 module.exports = router;
