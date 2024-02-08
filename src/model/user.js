@@ -3,9 +3,10 @@ const mongodb = require('mongodb');
 
 class User {
     constructor(params) {
-        this.userId = params.userId;
+        this.userId = null;
+        this._id = null;
         this.userName = params.userName;
-        this.email = params.email;
+        this.userEmail = params.userEmail;
     }
 
     save() {
@@ -14,7 +15,7 @@ class User {
         if (!this.userId) {
             return user.insertOne(this)
                 .then(res => {
-                    console.log('save USER');
+                    console.log('save USER', res);
                 })
                 .catch(e => {
                     console.error(e);
@@ -28,7 +29,7 @@ class User {
         return getDb()
             .collection('users')
             .find({
-                id: new mongodb.ObjectId(userId)
+                _id: new mongodb.ObjectId(userId)
             })
             .next()
             .then(res => {
@@ -38,4 +39,7 @@ class User {
                 console.error(e)
             });
     }
+}
+module.exports = {
+    User
 }

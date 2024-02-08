@@ -26,7 +26,7 @@ const adminGetProducts = (req, res, next) => {
     Product.fetchAll(products => {
         res.render('admin/products', {
             pagePath: '/admin/products',
-            docTitle: '상품목록',
+            pageTitle: '상품목록',
             lang: req.currentLanguage,
             products: products
         })
@@ -34,7 +34,7 @@ const adminGetProducts = (req, res, next) => {
 }
 const adminGetAddProductView = (req, res, next) => {
     res.render('admin/edit-product', {
-        docTitle: '상품 등록',
+        pageTitle: '상품 등록',
         pagePath: '/admin/add-product',
         lang: req.currentLanguage,
         editMode: false,
@@ -64,7 +64,7 @@ const adminGetEditProduct = (req, res, next) => {
             return res.redirect('/admin');
         }
         res.render('admin/edit-product', {
-            docTitle: `${product.title} 상품 수정`,
+            pageTitle: `${product.title} 상품 수정`,
             pagePath: '/admin/edit-product',
             lang: req.currentLanguage,
             editMode: editMode,

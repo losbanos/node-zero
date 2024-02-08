@@ -6,12 +6,12 @@ const getLogin = (req, res, next) => {
         res.status(301).cookie('isLogined', false, {maxAge: 0})
         res.redirect(path.resolve(__dirname, '/'));
     } else {
-        res.render('login', {docTitle: '로그인', pagePath: '/login', lang: req.currentLanguage, menus: menu.getMenus()});
+        res.render('login', {pageTitle: '로그인', pagePath: '/login', lang: req.currentLanguage, menus: menu.getMenus()});
     }
 
 }
 
-const getGoLogin = (req, res, next) => {
+const postogin = (req, res, next) => {
     const userName = req.body.userName;
     const userPassword = req.body.userPassword
     const date = new Date();
@@ -34,5 +34,5 @@ const getGoLogin = (req, res, next) => {
 }
 module.exports = {
     getLogin,
-    getGoLogin
+    postogin
 }

@@ -12,13 +12,13 @@ const getIndex = (req, res, next) => {
     const visitCount = parseInt(req.cookies.views) + 1 || 1;
     Product.fetchAll(products => {
         res.cookie('views', visitCount, {expires: setExpireTime(2)})
-            .render('shop/product-list', {docTitle: '메인', pagePath: '/', lang: req.currentLanguage, products: products});
+            .render('shop/product-list', {pageTitle: '메인', pagePath: '/', lang: req.currentLanguage, products: products});
     })
 }
 
 const getProductList = (req, res, next) => {
     Product.fetchAll(products => {
-        res.render('shop/product-list', {docTitle: '상품 목록', pagePath: '/product-list', products: products, lang: req.currentLanguage});
+        res.render('shop/product-list', {pageTitle: '상품 목록', pagePath: '/product-list', products: products, lang: req.currentLanguage});
     });
 }
 
@@ -33,7 +33,7 @@ const getCartProduct = (req, res) => {
                 }
             }
             res.render('shop/cart', {
-                docTitle: '장바구니',
+                pageTitle: '장바구니',
                 pagePath: '/cart',
                 lang: req.currentLanguage,
                 products: cartProducts
@@ -46,7 +46,7 @@ const getCartList = (req, res, next) => {
 }
 
 const getCheckout = (req, res, next) => {
-    res.render('shop/checkout', {pagePath: '/checkout', docTitle: '결제확인', lang: req.currentLanguage});
+    res.render('shop/checkout', {pagePath: '/checkout', pageTitle: '결제확인', lang: req.currentLanguage});
 }
 
 const addToCart = (req, res, next) => {
@@ -60,7 +60,7 @@ const addToCart = (req, res, next) => {
 const getOrders = (req, res, next) => {
     res.render('shop/orders', {
         pagePath: '/oders',
-        docTitle: '주문서',
+        pageTitle: '주문서',
         lang: req.currentLanguage
     })
 }
@@ -69,7 +69,7 @@ const getProductDetail = (req, res, next) => {
     const productId = req.params.productId;
     Product.findById(productId, product => {
         res.render('shop/product-detail', {
-            docTitle: product.title,
+            pageTitle: product.title,
             pagePath: '/shop/product-list',
             lang: req.currentLanguage,
             product: product

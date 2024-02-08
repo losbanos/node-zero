@@ -2,8 +2,8 @@ const express = require('express');
 const {getIndex, getProductList, getCartList, getCheckout, addToCart, getOrders, getProductDetail,
     postRemoveCartProduct
 } = require('../controllers/shop')
-const {getGoLogin, getLogin} = require('../controllers/common')
-const {getAddUser, postAddUser} = require('../controllers/user');
+const {postogin, getLogin} = require('../controllers/common')
+const {getRegisteUser, postRegisteUser, getUserList} = require('../controllers/user');
 const router = express.Router();
 
 router.get('/', getIndex);
@@ -15,7 +15,8 @@ router.post('/add-to-cart', addToCart);
 router.get('/orders', getOrders);
 router.get('/checkout', getCheckout);
 router.get('/login', getLogin)
-router.post('/gologin', getGoLogin);
-router.get('/add-user', getAddUser);
-router.post('/add-user', postAddUser);
+router.post('/gologin', postogin);
+router.get('/registe-user', getRegisteUser);
+router.post('/registe-user', postRegisteUser);
+router.get('/user-list', getUserList);
 module.exports = router;
