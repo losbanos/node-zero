@@ -1,6 +1,8 @@
 const {Product} = require('../model/product');
 const path = require('path');
-
+const {User} = require('../model/user');
+const {format} = require('date-fns');
+const {ko} = require('date-fns/locale');
 /**
  * For Admin Manage Middleware
  * @param req
@@ -95,11 +97,36 @@ const adminPostRemoveProduct = (req, res, next) => {
         res.redirect('/admin/products');
     });
 }
+
+const adminGetUserList = (req, res, next) => {
+    User.fetchAll().then(result => {
+        if (result) {
+            result.map(user => {
+                user.regDate = format(user.regDate || new Date('2024-01-01'), 'PPPP p', {
+                    locale: ko
+                })
+                return user;
+            })
+            res.render('admin/user-list', {
+                users: result,
+                pageTitle: '유저 목록',
+                pagePath: '/admin/user-list',
+                lang: req.currentLanguage
+            })
+        }
+    });
+}
+
+const adminPostRemoveUser = (req, res, next) => {
+    const userId = req.body.userId;
+}
 module.exports = {
     adminGetAddProductView,
     adminGetProducts,
     adminPostAddProduct,
     adminGetEditProduct,
     adminPostRemoveProduct,
-    adminPostEditProduct
+    adminPostEditProduct,
+    adminGetUserList,
+    adminPostRemoveUser
 }

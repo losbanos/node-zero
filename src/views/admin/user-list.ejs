@@ -4,6 +4,22 @@
 <%- include('../common/nav') %>
 <main>
     <h1>사용자 목록</h1>
-
+    <div>
+        <ul>
+            <% for (let user of users) {%>
+            <li>
+                <p>유저 이름: <%= user.userName %></p>
+                <p>유저 이메일: <%= user.userEmail %></p>
+                <p>가입일: <%= user.regDate %></p>
+                <a href="edit-user/<%= user._id%>?editMode=true" class="btn">정보 수정</a>
+                <form method="POST" action="remove-user">
+                    <button type="submit" class="btn">유저 삭제</button>
+                    <input type="hidden" name="userId" value="<%= user._id%>" />
+                </form>
+                <hr />
+            </li>
+            <%}%>
+        </ul>
+    </div>
 </main>
 <%- include('../common/end') %>

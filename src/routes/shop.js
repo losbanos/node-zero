@@ -1,9 +1,21 @@
 const express = require('express');
-const {getIndex, getProductList, getCartList, getCheckout, addToCart, getOrders, getProductDetail,
+
+const {getIndex,
+    getProductList,
+    getCartList,
+    getCheckout,
+    addToCart,
+    getOrders,
+    getProductDetail,
     postRemoveCartProduct
 } = require('../controllers/shop')
 const {postogin, getLogin} = require('../controllers/common')
-const {getRegisteUser, postRegisteUser, getUserList} = require('../controllers/user');
+
+const {getRegisteUser,
+    postRegisteUser,
+    getEditUser,
+    postEditUser
+} = require('../controllers/user');
 const router = express.Router();
 
 router.get('/', getIndex);
@@ -18,5 +30,7 @@ router.get('/login', getLogin)
 router.post('/gologin', postogin);
 router.get('/registe-user', getRegisteUser);
 router.post('/registe-user', postRegisteUser);
-router.get('/user-list', getUserList);
+router.get('/edit-user/:userId', getEditUser);
+router.post('/edit-user', postEditUser);
+
 module.exports = router;

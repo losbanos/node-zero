@@ -7,6 +7,7 @@ class User {
         this._id = null;
         this.userName = params.userName;
         this.userEmail = params.userEmail;
+        this.regDate = Date.now();
     }
 
     save() {
@@ -38,6 +39,18 @@ class User {
             .catch(e => {
                 console.error(e)
             });
+    }
+
+    static fetchAll() {
+        return getDb()
+            .collection('users')
+            .find()
+            .toArray()
+            .then(result => {
+                console.log('find user all');
+                return result;
+            })
+            .catch(e => console.error(e));
     }
 }
 module.exports = {

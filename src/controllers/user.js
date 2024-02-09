@@ -30,9 +30,31 @@ const postRegisteUser = (req, res, next) => {
         .catch(e => console.error(e))
 }
 
+const getEditUser = (req, res, next) => {
+    const userId = req.params.userId;
+    const editMode = req.query.editMode === 'true';
+    if (!editMode) {
+        res.redirect('/');
+    } else {
+        User.findById(userId).then( result => {
+            res.render('edit-user', {
+                pageTitle: '유저 정보 수정',
+                pagePath: '/edit-user',
+                lang: req.currentLanguage,
+                user: result
+            })
+        })
+    }
+}
+
+const postEditUser = (req, res, next) => {
+
+}
 
 module.exports = {
     getRegisteUser,
     postRegisteUser,
-    getUserList
+    getUserList,
+    getEditUser,
+    postEditUser
 }
