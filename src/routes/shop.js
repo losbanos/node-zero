@@ -4,7 +4,7 @@ const {getIndex,
     getProductList,
     getCartList,
     getCheckout,
-    addToCart,
+    postAddToCart,
     getOrders,
     getProductDetail,
     postRemoveCartProduct
@@ -23,7 +23,7 @@ router.get('/product-list', getProductList);
 router.get('/product-detail/:productId', getProductDetail);
 router.get('/cart', getCartList);
 router.post('/remove-cart-product', postRemoveCartProduct);
-router.post('/add-to-cart', addToCart);
+router.post('/add-to-cart', postAddToCart);
 router.get('/orders', getOrders);
 router.get('/checkout', getCheckout);
 router.get('/login', getLogin)

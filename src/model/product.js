@@ -89,16 +89,19 @@ class Product {
     }
 
     static findById(productId, cb) {
-        const db = getDb();
-        db.collection('products').find({
-            _id: new mongodb.ObjectId(productId)
-        }).next().then(product => {
-            console.log('product findById = ', product);
-            cb(product);
-            return product
-        }).catch(e => {
-            console.error(e);
-        })
+        return getDb().collection('products')
+            .find({_id: new mongodb.ObjectId(productId)})
+            .next()
+            .then(product => {
+                console.log('product findById = ', product);
+                if (cb) {
+                    cb(product);
+                }
+                return product
+            }).catch(e => {
+                console.error(e);
+                return e;
+            })
     }
 }
 

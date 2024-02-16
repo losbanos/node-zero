@@ -49,12 +49,19 @@ const getCheckout = (req, res, next) => {
     res.render('shop/checkout', {pagePath: '/checkout', pageTitle: '결제확인', lang: req.currentLanguage});
 }
 
-const addToCart = (req, res, next) => {
+const postAddToCart = (req, res, next) => {
     const productId = req.body.productId;
-    Product.findById(productId, (product) => {
-        Cart.addProductToCart(productId, product.price);
-    });
-    res.redirect('/cart');
+    Product.findById(productId)
+        .then(product => {
+            return req.user.addToCart(product);
+        })
+        .then(result => {
+            console.log('addtocart result = ', result);
+            res.redirect('/cart');
+            return res;
+        })
+        .catch(e => console.error(e))
+
 }
 
 const getOrders = (req, res, next) => {
@@ -93,7 +100,7 @@ module.exports = {
     getProductList,
     getCartList,
     getCheckout,
-    addToCart,
+    postAddToCart,
     getOrders,
     getProductDetail,
     postRemoveCartProduct

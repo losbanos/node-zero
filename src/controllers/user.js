@@ -19,7 +19,6 @@ const postRegisteUser = (req, res, next) => {
     });
     user.save()
         .then(result => {
-            console.log('user register success')
             res.render('shop/welcome-registe', {
                 pagePath: '/welcome-registe',
                 pageTitle: '가입 완료',
