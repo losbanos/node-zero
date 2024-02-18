@@ -31,7 +31,18 @@ class User {
     }
 
     addToCart(product) {
-        const updatedCart = {items: [{...product, quantity: 1}]};
+        const exitedProductIndex = this.cart.items.findIndex(item => {
+            return item.productId.toString() === product._id.toString();
+        });
+        const updatedCartItems = [...this.cart.items];
+        if (exitedProductIndex >= 0) {
+            updatedCartItems[exitedProductIndex].quantity += 1;
+
+        } else {
+            updatedCartItems.push({productId: product._id, quantity: 1});
+        }
+
+        const updatedCart = {items: updatedCartItems};
         return getDb().collection('users')
             .updateOne({_id: new ObjectId(this._id)}, {$set: {cart: updatedCart}})
             .then(result => {
