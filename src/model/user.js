@@ -52,6 +52,24 @@ class User {
             .catch(e => e);
 
     }
+
+    getCartList() {
+        const productIds = this.cart.items.map( item => item.productId);
+        console.log('this.cart.items = ', this.cart.items);
+        return getDb().collection('products')
+            .find({_id: {$in: productIds}})
+            .toArray()
+            .then(products => {
+                return products.map(product => {
+                    return {
+                        ...product,
+                        quantity: this.cart.items.find(item => {
+                            return item.productId.toString() === product._id.toString();
+                        }).quantity
+                    }
+                })
+            })
+    }
     static findById(userId) {
         return getDb()
             .collection('users')
@@ -60,7 +78,6 @@ class User {
             })
             .next()
             .then(res => {
-                console.log('find use by id');
                 return res;
             })
             .catch(e => {

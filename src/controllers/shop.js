@@ -42,7 +42,16 @@ const getCartProduct = (req, res) => {
     })
 }
 const getCartList = (req, res, next) => {
-    getCartProduct(req, res)
+    req.user.getCartList()
+        .then(products => {
+            res.render('shop/cart', {
+                pagePath: '/cart',
+                pageTitle: '장바구니',
+                lang: req.currentLanguage,
+                products
+            })
+        })
+        .catch(e => console.error(e));
 }
 
 const getCheckout = (req, res, next) => {
@@ -56,7 +65,6 @@ const postAddToCart = (req, res, next) => {
             return req.user.addToCart(product);
         })
         .then(result => {
-            console.log('addtocart result = ', result);
             res.redirect('/cart');
             return res;
         })

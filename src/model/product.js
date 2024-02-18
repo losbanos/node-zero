@@ -27,7 +27,6 @@ class Product {
         let result;
         if (!this.id) {
             return result = db.insertOne(this).then(res => {
-                console.log('save and update => result');
                 return res;
             }).catch(e => {
                 console.error(e);
@@ -35,7 +34,6 @@ class Product {
         }
         else {
             return result = db.updateOne({_id: new mongodb.ObjectId(this.id)}, {$set: this}).then(res => {
-                console.log('save and update => result');
                 return res;
             }).catch(e => {
                 console.error(e);
@@ -53,7 +51,6 @@ class Product {
             .collection('products')
             .updateOne({_id: new mongodb.ObjectId(productId)}, {$set: this})
             .then(result => {
-                console.log('update result =', result);
                 return result;
             })
             .catch(e => console.error(e))
@@ -80,7 +77,6 @@ class Product {
     static fetchAll(cb) {
         const db = getDb();
         db.collection('products').find().toArray().then(products => {
-            console.log('products = ', products);
             cb(products);
             return products;
         }).catch(error => {
@@ -93,7 +89,6 @@ class Product {
             .find({_id: new mongodb.ObjectId(productId)})
             .next()
             .then(product => {
-                console.log('product findById = ', product);
                 if (cb) {
                     cb(product);
                 }

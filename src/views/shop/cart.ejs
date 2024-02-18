@@ -8,7 +8,7 @@
         <ol>
             <% for (let product of products) {%>
                 <li>
-                    <h3><%= product.title %>(<%= product.qty%>)</h3>
+                    <h3><%= product.title %>(<%= product.quantity%>)</h3>
                     <p><img src="<%= product.imageUrl %>"/></p>
                     <p>가격: <%= product.price %></p>
                     <p>
@@ -17,7 +17,7 @@
                     </p>
                     <form action="/remove-cart-product" method="POST">
                         <button type="submit" class="btn">장바구니에서 삭제</button>
-                        <input type="hidden" name="productId" value="<%= product.id%>" />
+                        <input type="hidden" name="productId" value="<%= product._id%>" />
                     </form>
                 </li>
             <% }%>
