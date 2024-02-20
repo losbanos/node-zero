@@ -94,12 +94,11 @@ const getProductDetail = (req, res, next) => {
 
 const postRemoveCartProduct = (req, res, next) => {
     const productId = req.body.productId;
-    Product.findById(productId, product => {
-        console.log('product = ', product);
-        Cart.removeProduct(productId, product.price, () => {
-            getCartProduct(req, res);
-        });
-    })
+    req.user.removeFromCart(productId)
+        .then(result => {
+            console.log('result = ', result);
+            res.redirect('/cart');
+        })
 }
 
 
