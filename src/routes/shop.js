@@ -7,7 +7,8 @@ const {getIndex,
     postAddToCart,
     getOrders,
     getProductDetail,
-    postRemoveCartProduct
+    postRemoveCartProduct,
+    postAddToOders
 } = require('../controllers/shop')
 const {postogin, getLogin} = require('../controllers/common')
 
@@ -25,6 +26,7 @@ router.get('/cart', getCartList);
 router.post('/remove-cart-product', postRemoveCartProduct);
 router.post('/add-to-cart', postAddToCart);
 router.get('/orders', getOrders);
+router.post('/add-to-orders', postAddToOders)
 router.get('/checkout', getCheckout);
 router.get('/login', getLogin)
 router.post('/gologin', postogin);

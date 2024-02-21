@@ -73,11 +73,23 @@ const postAddToCart = (req, res, next) => {
 }
 
 const getOrders = (req, res, next) => {
-    res.render('shop/orders', {
-        pagePath: '/oders',
-        pageTitle: '주문서',
-        lang: req.currentLanguage
-    })
+    req.user.getOrders()
+        .then(orders => {
+            console.log('get orders result = ', orders);
+            res.render('shop/orders', {
+                pagePath: '/orders',
+                pageTitle: '주문 내역',
+                lang: req.currentLanguage,
+                orders
+            })
+        });
+}
+const postAddToOders = (req, res, next) => {
+    req.user.addToOrders()
+        .then(result => {
+            console.log('add order result = ', result);
+            res.redirect('/orders');
+        })
 }
 
 const getProductDetail = (req, res, next) => {
@@ -110,5 +122,6 @@ module.exports = {
     postAddToCart,
     getOrders,
     getProductDetail,
-    postRemoveCartProduct
+    postRemoveCartProduct,
+    postAddToOders
 }

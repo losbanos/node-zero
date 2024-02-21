@@ -22,6 +22,11 @@
                 </li>
             <% }%>
         </ol>
+        <hr />
+    <form action="/add-to-orders" method="post">
+        <button type="submit" class="btn">주문 하기</button>
+        <input type="hidden" name="products" value="<%= products %>" />
+    </form>
     <%} else {%>
         <h1> 장바구니에 상품이 없어 !!</h1>
     <%}%>

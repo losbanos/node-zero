@@ -83,6 +83,37 @@ class User {
             .then(cart => cart)
             .catch(e => console.error(e))
     }
+
+    addToOrders() {
+        return this.getCartList()
+            .then(products => {
+                const orderProduct = {
+                    user: {
+                        _id: new ObjectId(this._id),
+                        name: this.userName
+                    },
+                    items: products
+                }
+                return getDb().collection('orders').insertOne(orderProduct)
+            })
+            .then(result => {
+                this.cart = {items: []};
+                return getDb().collection('users')
+                    .updateOne({_id: new ObjectId(this._id)}, {$set: {cart: {items: []}}})
+            })
+            .catch(e => console.error(e))
+    }
+    getOrders() {
+        return getDb().collection('orders')
+            .find({
+                'user._id': this._id
+            }).toArray()
+            .then(result => {
+                console.log('getOrders = ', result);
+                return result;
+            })
+            .catch(e => console.error(e))
+    }
     static findById(userId) {
         return getDb()
             .collection('users')
