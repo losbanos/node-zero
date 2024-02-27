@@ -10,7 +10,6 @@ const {getIndex,
     postRemoveCartProduct,
     postAddToOders
 } = require('../controllers/shop')
-const {postogin, getLogin} = require('../controllers/common')
 
 const {getRegisteUser,
     postRegisteUser,
@@ -28,8 +27,6 @@ router.post('/add-to-cart', postAddToCart);
 router.get('/orders', getOrders);
 router.post('/add-to-orders', postAddToOders)
 router.get('/checkout', getCheckout);
-router.get('/login', getLogin)
-router.post('/gologin', postogin);
 router.get('/registe-user', getRegisteUser);
 router.post('/registe-user', postRegisteUser);
 router.get('/edit-user/:userId', getEditUser);

@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const {publicDir, rootDir} = require('./utils/path');
 const {routerAdmin} = require('./routes/admin');
 const routerShop = require('./routes/shop');
+const {routerAuth} = require('./routes/auth');
 const path = require('path');
 const initData = require('./controllers/initData');
 const {handle404} = require('./controllers/errors');
@@ -20,6 +21,7 @@ app.use(express.static(publicDir));
 app.use(initData);
 app.use('/admin', routerAdmin);
 app.use(routerShop);
+app.use(routerAuth);
 app.use(handle404);
 
 mongoConnect(client => {
